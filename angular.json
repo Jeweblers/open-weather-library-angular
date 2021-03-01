@@ -3,5 +3,46 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-  }
+    "open-weather": {
+      "projectType": "library",
+      "root": "projects/open-weather",
+      "sourceRoot": "projects/open-weather/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/open-weather/tsconfig.lib.json",
+            "project": "projects/open-weather/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/open-weather/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/open-weather/src/test.ts",
+            "tsConfig": "projects/open-weather/tsconfig.spec.json",
+            "karmaConfig": "projects/open-weather/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/open-weather/tsconfig.lib.json",
+              "projects/open-weather/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "open-weather"
 }
