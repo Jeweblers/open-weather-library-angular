@@ -1,6 +1,14 @@
 {
   "name": "@kilimanjaare/open-weather",
-  "version": "0.0.11",
+  "version": "1.0.2",
+  "homepage": "https://github.com/Jeweblers/open-weather-library-angular#readme",
+  "license": "MIT",
+  "keywords": [
+    "angular",
+    "openweather",
+    "api"
+  ],
+  "repository": "git@github.com:Jeweblers/open-weather-library-angular.git",
   "peerDependencies": {
     "@angular/common": "^11.1.2",
     "@angular/core": "^11.1.2"
