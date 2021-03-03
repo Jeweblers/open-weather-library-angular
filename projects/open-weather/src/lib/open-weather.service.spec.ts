@@ -36,7 +36,7 @@ describe('OpenWeatherService', () => {
       lat: 10.001
     };
 
-    service.oneCall({
+    service.getCurrentAndForecastWeather({
       lat: 10.001,
       lon: 20.002
     }).subscribe(response => {

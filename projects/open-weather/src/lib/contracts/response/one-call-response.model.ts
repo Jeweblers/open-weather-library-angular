@@ -1,39 +1,34 @@
+import {WeatherEntity} from './entities/weather-entity.model';
+import {SunriseSunsetEntity} from './entities/sunrise-sunset.entity.model';
+import {TemperatureFullDayEntity} from './entities/temperature-full-day-entity.model';
+import {TemperatureMinMaxEntity} from './entities/temperature-min-max-entity.model';
+import {PressureHumidityEntity} from './entities/pressure-humidity-entity.model';
+
 export interface OneCallResponse {
   lat?: number;
   lon?: number;
   timezone?: string;
   timezone_offset?: number;
-  current?: {
+  current?: SunriseSunsetEntity & PressureHumidityEntity & {
     dt: number;
-    sunrise: number;
-    sunset: number;
     temp: number;
     feels_like: number;
-    pressure: number;
-    humidity: number;
     dew_point: number;
     uvi: number;
     clouds: number;
     visibility: number;
     wind_speed: number;
     wind_deg: number;
-    weather: {
-      id: number;
-      main: string;
-      description: string;
-      icon: string;
-    }[];
+    weather: WeatherEntity[];
   };
   minutely?: {
     dt: number;
     precipitation: number;
   }[];
-  hourly?: {
+  hourly?: PressureHumidityEntity & {
     dt: number;
     temp: number;
     feels_like: number;
-    pressure: number;
-    humidity: number;
     dew_point: number;
     uvi: number;
     clouds: number;
@@ -41,19 +36,10 @@ export interface OneCallResponse {
     wind_speed: number;
     wind_deg: number;
     pop: number;
-    weather: {
-      id: number;
-      main: string;
-      description: string;
-      icon: string;
-    }[];
+    weather: WeatherEntity[];
   }[];
-  daily?: {
+  daily?: SunriseSunsetEntity & PressureHumidityEntity & {
     dt: number;
-    sunrise: number;
-    sunset: number;
-    pressure: number;
-    humidity: number;
     dew_point: number;
     wind_speed: number;
     wind_deg: number;
@@ -61,25 +47,8 @@ export interface OneCallResponse {
     pop: number;
     rain: number;
     uvi: number;
-    temp: {
-      day: number;
-      min: number;
-      max: number;
-      night: number;
-      eve: number;
-      morn: number;
-    };
-    feels_like: {
-      day: number;
-      night: number;
-      eve: number;
-      morn: number;
-    };
-    weather: {
-      id: number;
-      main: string;
-      description: string;
-      icon: string;
-    }[];
+    temp: TemperatureFullDayEntity & TemperatureMinMaxEntity;
+    feels_like: TemperatureFullDayEntity;
+    weather: WeatherEntity[];
   }[];
 }

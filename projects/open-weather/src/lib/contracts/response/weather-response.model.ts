@@ -1,41 +1,32 @@
+import {WeatherEntity} from './entities/weather-entity.model';
+import {CoordEntity} from './entities/coord-entity.model';
+import {WindEntity} from './entities/wind-entity.model';
+import {SunriseSunsetEntity} from './entities/sunrise-sunset.entity.model';
+import {PressureHumidityEntity} from './entities/pressure-humidity-entity.model';
+
 export interface WeatherResponse {
-  coord?: {
-    lon: number;
-    lat: number;
-  };
-  weather?: {
-    id: number,
-    main: string;
-    description: string;
-    icon: string;
-  }[];
-  base?: string;
-  main?: {
+  coord: CoordEntity;
+  weather: WeatherEntity[];
+  base: string;
+  main: PressureHumidityEntity & {
     temp: number;
     feels_like: number;
     temp_min: number;
     temp_max: number;
-    pressure: number;
-    humidity: number;
   };
-  visibility?: number;
-  wind?: {
-    speed: number;
-    deg: number;
-  };
-  clouds?: {
+  visibility: number;
+  wind: WindEntity;
+  clouds: {
     all: number;
   };
-  dt?: number;
-  sys?: {
+  dt: number;
+  sys: SunriseSunsetEntity &{
     type: number;
     id: number;
     country: number;
-    sunrise: number;
-    sunset: number;
   };
-  timezone?: number;
-  id?: number;
-  name?: string;
-  cod?: number;
+  timezone: number;
+  id: number;
+  name: string;
+  cod: number;
 }
