@@ -53,8 +53,8 @@ describe('OpenWeatherService', () => {
   it('should match response of current weather with the right data', () => {
     const responseMock = {};
 
-    service.getCurrentWeather({
-      location: 'Odessa'
+    service.getCurrentWeatherByCityName({
+      cityName: 'Odessa'
     }).subscribe(response => {
       expect(response).toEqual(responseMock);
     });
@@ -64,5 +64,25 @@ describe('OpenWeatherService', () => {
     expect(request.request.method).toEqual('GET');
 
     request.flush(responseMock);
+  });
+
+  it('should not add undefined query arguments in query parameter', () => {
+    service.getCurrentWeatherByCityName({cityName: 'city'}).subscribe();
+    httpTestingController.expectOne('http://api.dev/weather?q=city&appid=test-id');
+  });
+
+  it('should add state code into query once it is given', () => {
+    service.getCurrentWeatherByCityName({cityName: 'city', stateCode: 'state'}).subscribe();
+    httpTestingController.expectOne('http://api.dev/weather?q=city,state&appid=test-id');
+  });
+
+  it('should add mode parameter once it is passed as option', () => {
+    service.getCurrentWeatherByCityName({cityName: 'city', mode: 'xml'}).subscribe();
+    httpTestingController.expectOne('http://api.dev/weather?q=city&mode=xml&appid=test-id');
+  });
+
+  it('should add lat and lon as query param', () => {
+    service.getCurrentWeatherByGeographicCoordinates({lat: 10.01, lon: 20.01}).subscribe();
+    httpTestingController.expectOne('http://api.dev/weather?lat=10.01&lon=20.01&appid=test-id');
   });
 });
